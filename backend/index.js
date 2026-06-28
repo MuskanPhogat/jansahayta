@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('./db');
 const { analyzeIssue } = require('./aiController');
+const authRoutes = require('./routes/auth');
 const app = express();
 
 app.use(express.json());
@@ -27,6 +28,8 @@ app.post('/test-ai', async (req, res) => {
     res.json({ success: false, error: err.message });
   }
 });
+
+app.use('/api/auth', authRoutes);
 
 app.listen(5000, () => {
   console.log('Server is running on http://localhost:5000');
